@@ -1,15 +1,15 @@
 -- 查看所有表和视图，以及注释
-SET LINESIZE 200;
+SET LINESIZE 120;
 SET PAGESIZE 1024;
 
-TTITLE CENTER 'List of Tables';
+TTITLE CENTER 'List of Tables' SKIP 1 LINE;
 COLUMN no FORMAT 999 HEADING 'No.';
-COLUMN tabtype FORMAT A4 HEADING 'TYPE';
+COLUMN tabtype FORMAT A5 HEADING 'TYPE';
 COLUMN tabname FORMAT A32 HEADING 'NAME';
 COLUMN tabcmt FORMAT A80 HEADING 'COMMENT';
 
 SELECT ROWNUM as no,
-       DECODE(tc.TABLE_TYPE, 'TABLE', 'T', 'VIEW', 'V', 'X') AS tabtype,
+       DECODE(tc.TABLE_TYPE, 'TABLE', 'Table', 'VIEW', 'View', '???') AS tabtype,
        tc.TABLE_NAME AS tabname,
        REPLACE(REPLACE(TC.COMMENTS, CHR(13), ''), CHR(10), ' _R_N ') AS tabcmt
   FROM USER_TAB_COMMENTS tc
