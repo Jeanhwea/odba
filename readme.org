@@ -1,0 +1,13 @@
+#+TITLE: Oracle Database Admin
+#+AUTHOR: Jinghui Hu
+#+EMAIL: hujinghui@buaa.edu.cn
+#+DATE: <2019-08-30 Fri 05:00:50>
+#+HTML_LINK_UP: ../readme.html
+#+HTML_LINK_HOME: ../index.html
+#+TAGS: odba oracle dba admin scripts
+
+
+* Display Database Structures
+  - @d : display table add views
+  - @dt : display table
+  - @dl : display database (SID)
