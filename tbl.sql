@@ -1,7 +1,7 @@
 -- 查看所有表和视图，以及注释
 COLUMN tabtype FORMAT 999999 HEADING 'TYPE';
 COLUMN tabname FORMAT A15 HEADING 'NAME';
-COLUMN tabname FORMAT A80 HEADING 'COMMENT';
+COLUMN tabname HEADING 'COMMENT';
 
 SELECT DECODE(tc.TABLE_TYPE, 'TABLE', 'T', 'VIEW', 'V', 'X') AS tabtype,
        tc.TABLE_NAME AS tabname,
