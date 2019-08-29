@@ -1,9 +1,13 @@
 -- 查看所有表和视图，以及注释
+COLUMN tabtype FORMAT 999999 HEADING 'TYPE';
+COLUMN tabname FORMAT A15 HEADING 'NAME';
+COLUMN tabname FORMAT A100 HEADING 'COMMENT';
+
 SET HEADING OFF;
 
-SELECT DECODE(tc.TABLE_TYPE, 'TABLE', 'T', 'VIEW', 'V', 'X')
-         || ' ' || tc.TABLE_NAME || ' ' ||
-         REPLACE(REPLACE(TC.COMMENTS, CHR(13), ''), CHR(10), ' _R_N ')
+SELECT DECODE(tc.TABLE_TYPE, 'TABLE', 'T', 'VIEW', 'V', 'X') AS tabtype,
+       tc.TABLE_NAME AS tabname,
+       REPLACE(REPLACE(TC.COMMENTS, CHR(13), ''), CHR(10), ' _R_N ') AS tabcmt
   FROM USER_TAB_COMMENTS tc
  WHERE tc.TABLE_TYPE in ('TABLE', 'VIEW') AND
        REGEXP_LIKE(tc.TABLE_NAME, '^[0-9A-Za-z][_0-9A-Za-z]*$')
