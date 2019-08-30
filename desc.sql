@@ -11,4 +11,4 @@ SELECT cc.TABLE_NAME AS tabname,
        cc.COLUMN_NAME AS colname,
        cc.COMMENTS AS colcmt
   FROM USER_COL_COMMENTS cc
- WHERE cc.TABLE_NAME = 'ZK_USER_INFO';
+ WHERE cc.TABLE_NAME = '&tablename';
