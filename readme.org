@@ -7,6 +7,11 @@
 #+TAGS: odba oracle dba admin scripts
 
 
+* Execute SQL file from shell
+  #+BEGIN_SRC shell
+    echo 'exit' | sqlplus -S user/pass@host:port/sid @file.sql
+  #+END_SRC
+
 * Display Database Structures
   - @d : display table add views
   - @dt : display table
