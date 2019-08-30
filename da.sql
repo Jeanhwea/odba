@@ -11,6 +11,6 @@ COLUMN tabcmt FORMAT A80 HEADING 'COMMENT' TRUNCATE;
 
 SELECT tc.TABLE_NAME AS tabname,
        DECODE(tc.TABLE_TYPE, 'TABLE', 'Table', 'VIEW', 'View', '???') AS tabtype,
-       REPLACE(REPLACE(TC.COMMENTS, CHR(13), ''), CHR(10), ' _R_N ') AS tabcmt
+       REPLACE(REPLACE(tc.COMMENTS, CHR(13), ''), CHR(10), ' _R_N ') AS tabcmt
   FROM USER_TAB_COMMENTS tc
  ORDER BY tc.TABLE_NAME;
