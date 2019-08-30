@@ -12,7 +12,8 @@
     echo 'exit' | sqlplus -S user/pass@host:port/sid @file.sql
   #+END_SRC
 
-* Display Database Structures
-  - @d : display table add views
-  - @dt : display table
-  - @dl : display database (SID)
+* List Database Structures
+  - @d : display table and view
+  - @da : display all table
+  - @dt : display table, limited the table name to normal style
+  - @ds : display database (SID), Service Name
