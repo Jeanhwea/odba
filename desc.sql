@@ -7,8 +7,8 @@ DEFINE tablename = &1;
 
 -- TTITLE CENTER 'Columns of Table [&tablename]' SKIP 1 LINE;
 -- COLUMN tabname FORMAT A32 HEADING 'Table';
-COLUMN colname FORMAT A16 HEADING 'Name';
-COLUMN coltype FORMAT A10 HEADING 'Type';
+COLUMN colname FORMAT A32 HEADING 'Name';
+COLUMN coltype FORMAT A16 HEADING 'Type';
 COLUMN collen FORMAT 999999 HEADING 'Length';
 COLUMN colnull FORMAT A8 HEADING 'Nullable';
 COLUMN colcmt FORMAT A80 HEADING 'Comment' TRUNCATE;
