@@ -16,8 +16,8 @@ COLUMN colcmt FORMAT A80 HEADING 'Comment' TRUNCATE;
 
 
 SELECT tc.COLUMN_NAME AS colname,
-       tc.DATA_TYPE AS coltype,
-       tc.DATA_LENGTH AS collen,
+       tc.DATA_TYPE || '(' || tc.DATA_LENGTH || ')' AS coltype,
+       -- tc.DATA_LENGTH AS collen,
        DECODE(tc.NULLABLE, 'N', 'No', 'Y', 'Yes') AS colnull,
        DECODE((SELECT cs.CONSTRAINT_TYPE
                  FROM USER_CONS_COLUMNS uc, USER_CONSTRAINTS cs
