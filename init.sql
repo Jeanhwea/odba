@@ -1,7 +1,7 @@
 -- setup line
 SET TERMOUT OFF;
 
-SET LONG 50000;
+SET LONG 32;
 SET PAGESIZE 50000;
 
 -- setup line width to terminal screen width
