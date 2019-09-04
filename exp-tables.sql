@@ -12,6 +12,8 @@ SELECT 'CREATE TABLE ' || cmt.TABLE_NAME || ' (' || CHR(10) ||
              DECODE(col.DATA_TYPE,
                     'DATE', col.DATA_TYPE,
                     'NUMBER', col.DATA_TYPE,
+                    'BLOB', col.DATA_TYPE,
+                    'CLOB', col.DATA_TYPE,
                     col.DATA_TYPE || '(' || col.DATA_LENGTH || ')') ||
                     DECODE(col.NULLABLE, 'N', ' NOT NULL', '') ||
                     DECODE((
