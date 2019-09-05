@@ -32,4 +32,4 @@ SELECT tc.COLUMN_NAME AS colname,
              ON tc.TABLE_NAME = cc.TABLE_NAME AND
          tc.COLUMN_NAME = cc.COLUMN_NAME
  WHERE UPPER(tc.TABLE_NAME) = UPPER('&tablename')
- ORDER BY tc.COLUMN_ID;
+ ORDER BY ispk, colnull, tc.COLUMN_ID;
