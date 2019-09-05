@@ -5,12 +5,7 @@ SET TAB OFF;
 SET VERIFY OFF;
 SET TERMOUT OFF;
 
--- read tablename from database
-COLUMN tablename NOPRINT NEW_VALUE tabname;
-SELECT UPPER(tc.TABLE_NAME) AS tabname
-  FROM USER_TAB_COLUMNS tc
- WHERE UPPER(tc.TABLE_NAME) = UPPER('&1') AND
-       ROWNUM <= 1;
+DEFINE tablename = '&1';
 
 TTITLE 'List columns of table [&tablename]' SKIP 1 LINE;
 COLUMN colname FORMAT A32 HEADING 'Name';
