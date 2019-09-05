@@ -2,8 +2,8 @@ SET LINESIZE 255;
 SET PAGESIZE 50000;
 SET FEEDBACK OFF;
 SET TAB OFF;
--- SET VERIFY OFF;
--- SET TERMOUT OFF;
+SET VERIFY OFF;
+SET TERMOUT OFF;
 
 -- read tablename from database
 COLUMN tablename NOPRINT NEW_VALUE tabname;
@@ -37,5 +37,5 @@ SELECT tc.COLUMN_NAME AS colname,
          LEFT JOIN USER_COL_COMMENTS cc
              ON tc.TABLE_NAME = cc.TABLE_NAME AND
          tc.COLUMN_NAME = cc.COLUMN_NAME
- WHERE tc.TABLE_NAME = '&tablename'
+ WHERE UPPER(tc.TABLE_NAME) = UPPER('&tablename')
  ORDER BY ispk, colnull, colname;
