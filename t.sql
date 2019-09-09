@@ -7,7 +7,7 @@ SET TERMOUT OFF;
 
 DEFINE tablename = '&1';
 
-TTITLE 'List columns of table [&tablename]' SKIP 1 LINE;
+TTITLE LEFT 'List columns of table [&tablename]' SKIP 1 LINE;
 COLUMN colname FORMAT A25 HEADING 'Name';
 COLUMN coltype FORMAT A10 HEADING 'Type';
 COLUMN collen FORMAT 9999 HEADING 'Len';
