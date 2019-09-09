@@ -4,9 +4,14 @@ SET FEEDBACK OFF;
 SET TAB OFF;
 
 TTITLE LEFT 'List of User Tablespaces' SKIP 1 LINE;
-COLUMN tspname FORMAT A32 HEADING 'Tablespace';
+COLUMN tspname FORMAT A32 HEADING 'Tablespace Name';
+COLUMN blksz FORMAT 99999 HEADING 'Block Size';
+
+-- desc USER_TABLESPACES
 
 SELECT
-  uts.TABLESPACE_NAME AS tspname
+  uts.TABLESPACE_NAME AS tspname,
+  uts.BLOCK_SIZE AS blksz,
+  uts.STATUS
   FROM USER_TABLESPACES uts
  ORDER BY tspname;

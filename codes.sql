@@ -1,11 +1,3 @@
--- 查看ORACLE 数据库中本用户下的所有表
-
-SELECT table_name FROM user_tables;
-
--- 查看ORACLE 数据库中所有用户下的所有表
-
-select user,table_name from all_tables;
-
 -- 查看ORACLE 数据库中本用户下的所有列
 
 select table_name,column_name from user_tab_columns;
@@ -50,7 +42,7 @@ SELECT TABLE_NAME, COLUMN_ID, COLUMN_NAME, DATA_TYPE, DATA_LENGTH, DATA_PRECISIO
 
 --查看所有表空间
 
-select tablespace_name, sum(bytes)/1024/1024 from dba_data_files group by tablespace_name
+select tablespace_name, sum(bytes)/1024/1024 from dba_data_files group by tablespace_name;
 
 --查看未使用表空间大小
 
