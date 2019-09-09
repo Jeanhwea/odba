@@ -3,14 +3,16 @@ SET PAGESIZE 50000;
 SET FEEDBACK OFF;
 SET TAB OFF;
 
--- TTITLE CENTER 'List of Tables' SKIP 1 LINE;
--- COLUMN no FORMAT 9999 HEADING 'No.';
-COLUMN tabname FORMAT A32 HEADING 'Name';
-COLUMN tabtype FORMAT A6 HEADING 'Type';
-COLUMN tabcmt FORMAT A80 HEADING 'Comment' TRUNCATE;
+TTITLE LEFT 'List of User Tables' SKIP 1 LINE;
+COLUMN tsname FORMAT A20 HEADING 'Tablespace';
+COLUMN tabname FORMAT A32 HEADING 'Tablename';
+COLUMN tabcmt FORMAT A80 HEADING 'Comments' TRUNCATE;
 
-SELECT tc.TABLE_NAME AS tabname,
-       DECODE(tc.TABLE_TYPE, 'TABLE', 'Table', 'VIEW', 'View', '???') AS tabtype,
-       REPLACE(REPLACE(tc.COMMENTS, CHR(13), ''), CHR(10), ' _R_N ') AS tabcmt
-  FROM USER_TAB_COMMENTS tc
- ORDER BY tc.TABLE_NAME;
+SELECT
+  atbs.TABLESPACE_NAME AS tsname,
+  atbs.TABLE_NAME AS tabname,
+  REPLACE(REPLACE(utbcmts.COMMENTS, CHR(13), ''), CHR(10), '\n') AS tabcmt
+  FROM ALL_TABLES atbs
+         LEFT JOIN USER_TAB_COMMENTS utbcmts
+             ON atbs.TABLE_NAME = utbcmts.TABLE_NAME
+ ORDER BY tsname, tabname;
