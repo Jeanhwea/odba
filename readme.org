@@ -14,10 +14,11 @@
   #+END_SRC
 
 * List Database Structures
-  - @d : display table and view
-  - @da : display all table
-  - @dt : display table, limited the table name to normal style
-  - @ds : display database (SID), Service Name
+  - @d - display tables, views and sequences
+  - @da - display all tables
+  - @dt - display user tables
+  - @ds - display user sequences
+  - @dv - display user views
 
 * Table related scripts
-  - @t <tablename> : describe table
+  - @t <tablename> - describe table
