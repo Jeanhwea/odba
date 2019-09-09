@@ -10,10 +10,9 @@ COLUMN tabname FORMAT A32 HEADING 'Name';
 COLUMN tabtype FORMAT A6 HEADING 'Type';
 COLUMN tabcmt FORMAT A80 HEADING 'Comment' TRUNCATE;
 
-SELECT tc.TABLE_NAME AS tabname,
-       DECODE(tc.TABLE_TYPE, 'TABLE', 'Table', 'VIEW', 'View', '???') AS tabtype,
-       REPLACE(REPLACE(tc.COMMENTS, CHR(13), ''), CHR(10), ' _R_N ') AS tabcmt
-  FROM USER_TAB_COMMENTS tc
- WHERE tc.TABLE_TYPE = 'TABLE' AND
-       REGEXP_LIKE(tc.TABLE_NAME, '^[0-9A-Za-z][_0-9A-Za-z]*$')
- ORDER BY tc.TABLE_NAME;
+SELECT utbs.TABLE_NAME AS tabname,
+       REPLACE(REPLACE(utbcmts.COMMENTS, CHR(13), ''), CHR(10), '\n') AS tabcmt
+  FROM USER_TABLES utbs
+         LEFT JOIN USER_TAB_COMMENTS utbcmts
+             ON utbs.TABLE_NAME = utbcmts.TABLE_NAME
+ ORDER BY tabname;
