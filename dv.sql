@@ -1,0 +1,16 @@
+SET LINESIZE 255;
+SET PAGESIZE 50000;
+SET FEEDBACK OFF;
+SET TAB OFF;
+
+TTITLE LEFT 'List of User Views' SKIP 1 LINE;
+COLUMN vewname FORMAT A32 HEADING 'Viewname';
+COLUMN vewcmt FORMAT A80 HEADING 'Comments' TRUNCATE;
+
+SELECT
+  uvws.VIEW_NAME AS vewname,
+  REPLACE(REPLACE(utbcmts.COMMENTS, CHR(13), ''), CHR(10), '\n') AS vewcmt
+  FROM USER_VIEWS uvws
+         LEFT JOIN USER_TAB_COMMENTS utbcmts
+             ON uvws.VIEW_NAME = utbcmts.TABLE_NAME
+ ORDER BY vewname;
