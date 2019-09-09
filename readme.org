@@ -8,9 +8,14 @@
 
 
 * Execute SQL file from shell
-  #+BEGIN_SRC shell
+  #+BEGIN_SRC sh
     echo exit | sqlplus -S user/pass@host:port/sid @file[.sql]
     sqlplus -S user/pass@host:port/sid < file.sql
+  #+END_SRC
+
+  For example, list all tables from shell
+  #+BEGIN_SRC sh
+    sqlplus -SL user/pass@host:port/sid < dt.sql | sed '0,/^--/d;s/ .*$//g' | column
   #+END_SRC
 
 * List Database Structures
