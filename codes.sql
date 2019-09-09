@@ -1,15 +1,3 @@
--- 查看ORACLE 数据库中本用户下的所有列
-
-select table_name,column_name from user_tab_columns;
-
--- 查看ORACLE 数据库中本用户下的所有列
-
-select user,table_name,column_name from all_tab_columns;
-
--- 查看ORACLE 数据库中的序列号
-
-select * from user_sequences;
-
 -- 上面的所有对象，都可以通过下面的SQL语句查询得到
 
 -- 查询所有的用户生成的ORACLE对象
