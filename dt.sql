@@ -6,12 +6,14 @@ SET TAB OFF;
 
 -- TTITLE CENTER 'List of Tables' SKIP 1 LINE;
 -- COLUMN no FORMAT 9999 HEADING 'No.';
+COLUMN tsname FORMAT A20 HEADING 'Tablespace Name';
 COLUMN tabname FORMAT A32 HEADING 'Name';
-COLUMN tabtype FORMAT A6 HEADING 'Type';
 COLUMN tabcmt FORMAT A80 HEADING 'Comment' TRUNCATE;
 
-SELECT utbs.TABLE_NAME AS tabname,
-       REPLACE(REPLACE(utbcmts.COMMENTS, CHR(13), ''), CHR(10), '\n') AS tabcmt
+SELECT
+  utbs.TABLESPACE_NAME AS tsname,
+  utbs.TABLE_NAME AS tabname,
+  REPLACE(REPLACE(utbcmts.COMMENTS, CHR(13), ''), CHR(10), '\n') AS tabcmt
   FROM USER_TABLES utbs
          LEFT JOIN USER_TAB_COMMENTS utbcmts
              ON utbs.TABLE_NAME = utbcmts.TABLE_NAME
