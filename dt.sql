@@ -17,4 +17,4 @@ SELECT
   FROM USER_TABLES utbs
          LEFT JOIN USER_TAB_COMMENTS utbcmts
              ON utbs.TABLE_NAME = utbcmts.TABLE_NAME
- ORDER BY tabname;
+ ORDER BY tsname, tabname;
