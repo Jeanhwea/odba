@@ -13,6 +13,6 @@ HOST echo "SET LINESIZE $(./termwidth.sh)" > .tmp.sql;
 HOST rm .tmp.sql;
 
 -- change data format to common readable format
-ALTER SESSION SET nls_date_format = 'yyyy-mm-dd hh24:mi:ss';
+ALTER SESSION SET NLS_DATE_FORMAT = 'yyyy-mm-dd hh24:mi:ss';
 
 SET TERMOUT ON;

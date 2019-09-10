@@ -6,11 +6,15 @@ SET TAB OFF;
 TTITLE LEFT 'Database Server Information' SKIP 1 LINE;
 COLUMN hostname FORMAT A16 HEADING 'Host';
 COLUMN ipaddr FORMAT A16 HEADING 'IP';
+COLUMN dbtz HEADING 'Database Timezone';
+COLUMN sesstz HEADING 'Session Timezone';
 COLUMN servid FORMAT A16 HEADING 'SID';
 
 SELECT
   UTL_INADDR.GET_HOST_NAME AS hostname,
   UTL_INADDR.GET_HOST_ADDRESS AS ipaddr,
+  DBTIMEZONE AS dbtz,
+  SESSIONTIMEZONE AS sesstz,
   (
     SELECT NAME FROM V$DATABASE
   ) AS servid
