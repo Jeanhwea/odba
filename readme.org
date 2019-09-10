@@ -21,6 +21,7 @@
 * List Database Structures
   - @d - display tables, views and sequences
   - @da - display all tables
+  - @db - display all tablespaces
   - @dt - display user tables
   - @ds - display user sequences
   - @dv - display user views
