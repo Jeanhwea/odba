@@ -23,9 +23,9 @@ SELECT
   sess.SCHEMANAME AS scmname,
   sess.SERVICE_NAME AS servid,
   sess.OSUSER || '@' || sess.MACHINE AS osid,
-  sess.PROGRAM AS program,
-  sess.STATUS AS status,
-  sess.STATE AS state
+  -- sess.STATUS AS status,
+  -- sess.STATE AS state,
+  sess.PROGRAM AS program
   FROM V$SESSION sess
  WHERE sess.TYPE = 'USER'
- ORDER BY logontime DESC, username, status;
+ ORDER BY logontime DESC, username;
