@@ -4,6 +4,9 @@ SET TERMOUT OFF;
 SET LONG 32;
 SET PAGESIZE 50000;
 
+-- set vim as default editor
+DEFINE _EDITOR=vim
+
 -- setup line width to terminal screen width
 HOST echo "SET LINESIZE $(./termwidth.sh)" > .tmp.sql;
 @.tmp.sql;
