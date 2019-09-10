@@ -6,11 +6,15 @@ SET TAB OFF;
 TTITLE LEFT 'List of User Sessions' SKIP 1 LINE;
 COLUMN username FORMAT A16 HEADING 'User Name';
 COLUMN status FORMAT A10 HEADING 'Status';
+COLUMN state FORMAT A16 HEADING 'State';
 COLUMN machine FORMAT A24 HEADING 'MACHINE';
+COLUMN servid FORMAT A16 HEADING 'Service Name';
 
 SELECT
   sess.USERNAME AS username,
   sess.STATUS AS status,
-  sess.MACHINE AS machine
+  sess.STATE AS state,
+  sess.MACHINE AS machine,
+  sess.SERVICE_NAME AS servid
   FROM V$SESSION sess
  ORDER BY username, status;
