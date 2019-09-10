@@ -18,7 +18,7 @@ COLUMN status FORMAT A8 HEADING 'Status' TRUNCATE;
 COLUMN state FORMAT A8 HEADING 'State' TRUNCATE;
 
 SELECT
-  sess.LOGON_TIME AS logontime,
+  sess.LOGON_TIME + 8/24 AS logontime,
   sess.USERNAME AS username,
   sess.SCHEMANAME AS scmname,
   sess.SERVICE_NAME AS servid,
