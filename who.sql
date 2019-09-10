@@ -1,0 +1,16 @@
+SET LINESIZE 255;
+SET PAGESIZE 50000;
+SET FEEDBACK OFF;
+SET TAB OFF;
+
+TTITLE LEFT 'List of User Sessions' SKIP 1 LINE;
+COLUMN username FORMAT A10 HEADING 'User Name';
+COLUMN status FORMAT A10 HEADING 'Status';
+COLUMN machine FORMAT A10 HEADING 'MACHINE';
+
+SELECT
+  sess.USERNAME AS username,
+  sess.STATUS AS status,
+  sess.MACHINE AS machine
+  FROM V$SESSION sess
+ ORDER BY username;
