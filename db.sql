@@ -10,7 +10,7 @@ COLUMN tspubts FORMAT A10 HEADING 'User Size';
 COLUMN tspmbts FORMAT A10 HEADING 'Max Size';
 COLUMN tspfree FORMAT A10 HEADING 'Free';
 COLUMN tspext FORMAT A8 HEADING 'Extent?';
-COLUMN tspfile FORMAT A64 HEADING 'Data File';
+COLUMN tspfile FORMAT A80 HEADING 'Data File';
 
 -- desc USER_TABLESPACES
 
