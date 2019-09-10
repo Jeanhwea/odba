@@ -13,4 +13,4 @@ SELECT
   sess.STATUS AS status,
   sess.MACHINE AS machine
   FROM V$SESSION sess
- ORDER BY username;
+ ORDER BY username, status;
