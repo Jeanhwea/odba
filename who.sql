@@ -9,12 +9,11 @@ COLUMN logontime HEADING 'Login Time';
 COLUMN username FORMAT A12 HEADING 'User Name' TRUNCATE;
 COLUMN servid FORMAT A12 HEADING 'Service Name';
 COLUMN osid FORMAT A24 HEADING 'User@Hostname';
-COLUMN program FORMAT A32 HEADING 'Program' TRUNCATE;
+COLUMN program FORMAT A24 HEADING 'Program' TRUNCATE;
 COLUMN status FORMAT A8 HEADING 'Status' TRUNCATE;
 COLUMN state FORMAT A8 HEADING 'State' TRUNCATE;
 
 SELECT
-  -- sess.TYPE AS logintype,
   sess.LOGON_TIME AS logontime,
   sess.USERNAME AS username,
   sess.SERVICE_NAME AS servid,
@@ -24,4 +23,4 @@ SELECT
   sess.STATE AS state
   FROM V$SESSION sess
  WHERE sess.TYPE = 'USER'
- ORDER BY logintype, username, status;
+ ORDER BY logontime DESC, username, status;
