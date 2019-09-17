@@ -1,0 +1,10 @@
+USERID=bamtri_mes/bamtri_mes@192.168.0.231/xe
+BUFFER=1048576
+FROMUSER=bamtri_mes
+TOUSER=bamtri_mes
+GRANTS=y
+INDEXES=y
+COMMIT=n
+ROWS=y
+CONSTRAINTS=y
+COMPILE=y

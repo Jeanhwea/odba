@@ -1,5 +1,0 @@
-FILE=data.dmp
-GRANTS=y
-INDEXES=y
-CONSTRAINTS=y
-ROWS=y

@@ -1,8 +1,9 @@
 @echo off
 set tag=%date:~0,4%%date:~5,2%%date:~8,2%
+set logfile=exp109.log
+set datfile=data.dmp
 
-exp bamtri_mes/bamtri_mes@192.168.0.214/ora10g PARFILE=options.txt LOG=exp109.log OWNER=bamtri_mes
-
-zip data%tag%.zip data.dmp exp109.log
-rm data.dmp exp109.log
+exp PARFILE=expopts.txt LOG=%logfile% FILE=%datfile%
+zip data%tag%.zip %datfile% %logfile%
+rm %datfile% %logfile%
 mv data%tag%.zip dump
