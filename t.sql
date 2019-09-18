@@ -40,7 +40,7 @@ SELECT
     SELECT REPLACE(REPLACE(uclc.COMMENTS, CHR(13), ''), CHR(10), '\n')
       FROM USER_COL_COMMENTS uclc
      WHERE uclc.COLUMN_NAME = utbc.COLUMN_NAME AND
-           uclc.TABLE_NAME = uclc.TABLE_NAME AND
+           uclc.TABLE_NAME = utbc.TABLE_NAME AND
            ROWNUM <= 1
   ) AS colcmt
   FROM USER_TAB_COLUMNS utbc
