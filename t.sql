@@ -50,19 +50,15 @@ SELECT
 
 
 TTITLE LEFT 'List constraints of table [&tablename]' SKIP 1 LINE;
-COLUMN cstname FORMAT A25 HEADING 'Constraint';
-COLUMN colnames FORMAT A25 HEADING 'Name';
+COLUMN cstname FORMAT A32 HEADING 'Constraint';
+COLUMN colname FORMAT A32 HEADING 'Name';
 
 -- list constraint
 SELECT
   uccl.CONSTRAINT_NAME AS cstname,
-  LISTAGG(uccl.COLUMN_NAME, ',')
-    WITHIN GROUP(uccl.COLUMN_NAME ORDER BY uccl.POSITION)
-    AS colnames
-  --  AS colname
+  uccl.COLUMN_NAME AS colname
   FROM USER_CONS_COLUMNS uccl, USER_CONSTRAINTS ucst
  WHERE ucst.CONSTRAINT_NAME = uccl.CONSTRAINT_NAME AND
        ucst.CONSTRAINT_TYPE = 'U' AND
        UPPER(uccl.TABLE_NAME) = UPPER('&tablename')
- -- ORDER BY uccl.POSITION
- GROUP BY uccl.CONSTRAINT_NAME;
+ ORDER BY uccl.POSITION;
