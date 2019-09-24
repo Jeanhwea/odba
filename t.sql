@@ -56,7 +56,9 @@ COLUMN colnames FORMAT A25 HEADING 'Name';
 -- list constraint
 SELECT
   uccl.CONSTRAINT_NAME AS cstname,
-  LISTAGG(uccl.COLUMN_NAME, ',') AS colnames
+  LISTAGG(uccl.COLUMN_NAME, ',')
+    WITHIN GROUP(uccl.COLUMN_NAME)
+    AS colnames
   --  AS colname
   FROM USER_CONS_COLUMNS uccl, USER_CONSTRAINTS ucst
  WHERE ucst.CONSTRAINT_NAME = uccl.CONSTRAINT_NAME AND
