@@ -21,6 +21,7 @@ SET TERMOUT ON;
 -- Maximun length of user column name
 -- SELECT MAX(LENGTH(COLUMN_NAME)) USER_TAB_COLUMNS;
 
+-- list table columns
 SELECT
   DECODE(
     (SELECT ucst.CONSTRAINT_TYPE
@@ -46,3 +47,20 @@ SELECT
   FROM USER_TAB_COLUMNS utbc
  WHERE UPPER(utbc.TABLE_NAME) = UPPER('&tablename')
  ORDER BY ispk, colnull, colname;
+
+
+TTITLE LEFT 'List constraints of table [&tablename]' SKIP 1 LINE;
+COLUMN cstname FORMAT A25 HEADING 'Constraint';
+COLUMN colnames FORMAT A25 HEADING 'Name';
+
+-- list constraint
+SELECT
+  uccl.CONSTRAINT_NAME AS cstname,
+  LISTAGG(uccl.COLUMN_NAME, ',') AS colnames
+  --  AS colname
+  FROM USER_CONS_COLUMNS uccl, USER_CONSTRAINTS ucst
+ WHERE ucst.CONSTRAINT_NAME = uccl.CONSTRAINT_NAME AND
+       ucst.CONSTRAINT_TYPE = 'U' AND
+       UPPER(uccl.TABLE_NAME) = UPPER('&tablename')
+ -- ORDER BY uccl.POSITION
+ GROUP BY uccl.CONSTRAINT_NAME;
