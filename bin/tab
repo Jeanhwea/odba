@@ -4,11 +4,18 @@ ROOT=$(git -C ${HERE} rev-parse --show-toplevel)
 
 source "${ROOT}/bin/setup"
 
-cd ${ROOT}
+cd ${ROOT} && echo "Connect to ${conn} in $(pwd)"
 tabs=($(sqlplus -SL ${conn} < dt.sql | sed '1,/---/d' | awk '{print $1}'))
 
 select tab in ${tabs[@]}; do
-  echo "Connect to ${conn} in $(pwd)" && \
-    echo 'exit' | sqlplus -SL ${conn} @t ${tab} && \
-    break;
+  if [ ${tab} != '' ]; then
+    echo 'exit' | sqlplus -SL ${conn} @t ${tab} \
+      && break
+  else
+    read -p 'filter with: ' ans
+    tabs=($(echo ${aa[@]} | tr ' ' '\n' | grep -i "${ans}"))
+    [ ${#tabs[@]} -eq 1 ] && \
+      echo 'exit' | sqlplus -SL ${conn} @t ${tab[0]} \
+      && break
+  fi
 done
