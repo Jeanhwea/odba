@@ -9,5 +9,6 @@ tabs=($(sqlplus -SL ${conn} < dt.sql | sed '1,/---/d' | awk '{print $1}'))
 
 select tab in ${tabs[@]}; do
   echo "Connect to ${conn} in $ (pwd)" && \
-    echo 'exit' | sqlplus -SL ${conn} @t ${tab}
+    echo 'exit' | sqlplus -SL ${conn} @t ${tab} && \
+    break;
 done
