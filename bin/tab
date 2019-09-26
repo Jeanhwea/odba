@@ -11,12 +11,12 @@ PS3='Enter number to select, s to skip: '
 while [ ${#tabs[@]} -gt 0 ]; do
   select tab in ${tabs[@]}; do break; done
   if [ "${tab}" != '' ]; then
-    echo 'exit' | sqlplus -SL ${conn} @t ${tab} && break
+    yes 'exit' | sqlplus -SL ${conn} @t ${tab} && break
   else
     read -p 'Filter tables with: ' ans
     tabs=($(echo ${tabs[@]} | tr ' ' '\n' | grep -i "${ans}"))
     if [ ${#tabs[@]} -eq 1 ]; then
-      echo 'exit' | sqlplus -SL ${conn} @t ${tabs[0]} && break
+      yes 'exit' | sqlplus -SL ${conn} @t ${tabs[0]} && break
     fi
   fi
 done
