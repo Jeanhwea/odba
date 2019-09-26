@@ -1,0 +1,26 @@
+#!/bin/bash
+HERE=$(cd $(dirname $0); pwd)
+ROOT=$(git -C ${HERE} rev-parse --show-toplevel)
+SQLPLUS=$([ -x /usr/bin/rlwrap ] && echo 'rlwrap -c sqlplus' || echo 'sqlplus')
+CONNFILE="${ROOT}/tmp/sqlplus.list"
+
+[ ! -f ${CONNFILE} ] && \
+  echo "Connections file [${CONNFILE}] is not found" \
+  && exit 1
+
+conns=($(cat ${CONNFILE}))
+[ ${#conns[@]} -eq 0 ] && \
+  echo "Connections file [${CONNFILE}] is empty" \
+  && exit 1
+
+if [ ${#conns[@]} -gt 1 ]; then
+  read -p "Connect to ${conns[0]}? [Y/n]: " ans
+  if [ "${ans}" == "n" ] || [ "${ans}" == "N" ]; then
+    echo "Choosing a connenction... Ctrl-C to Cancel" \
+      && select conn in ${conns[@]}; do break; done
+  else
+    conn=${conns[0]}
+  fi
+else
+  conn=${conns[0]}
+fi

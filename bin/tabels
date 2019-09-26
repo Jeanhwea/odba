@@ -6,4 +6,4 @@ source "${ROOT}/bin/setup"
 
 cd ${ROOT} && \
   echo "Connect to ${conn} in $(pwd)" && \
-  ${SQLPLUS} ${conn}
+  sqlplus -SL ${conn} < dt.sql
