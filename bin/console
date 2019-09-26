@@ -12,3 +12,15 @@ conns=($(cat ${CONNFILE}))
 [ ${#conns[@]} -eq 0 ] && \
   echo "Connections file [${CONNFILE}] is empty" \
   && exit 1
+
+if [ ${#conns[@]} -gt 1 ]; then
+  echo "Choosing a connenction... Ctrl-C to Cancel"
+  select conn in ${conns[@]}; do break; done
+  # read -p "Connect to ${conns[0]}? [Y/n]: " ans
+  # if [ "${ans}" == "n" ] || [ "${ans}" == "N" ]; then
+  # fi
+else
+  conn=${conns[0]}
+fi
+
+echo "Connect to ${conn}"
