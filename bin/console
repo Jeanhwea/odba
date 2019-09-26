@@ -4,5 +4,5 @@ ROOT=$(git -C ${HERE} rev-parse --show-toplevel)
 SQLPLUS=$([ -x /usr/bin/rlwrap ] && echo 'rlwrap -c sqlplus' || echo 'sqlplus')
 CONNFILE="${ROOT}/tmp/sqlplus.list"
 
-conns=($(cat ${CONNFILE}))
 [ ${#conns[@]} -eq 0 ] && echo "Connections file [${CONNFILE}] is not found"
+conns=($(cat ${CONNFILE}))
