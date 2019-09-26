@@ -13,7 +13,7 @@ select tab in ${tabs[@]}; do
       && break
   else
     read -p 'filter with: ' ans
-    tabs=($(echo ${aa[@]} | tr ' ' '\n' | grep -i "${ans}"))
+    tabs=($(echo ${tabs[@]} | tr ' ' '\n' | grep -i "${ans}"))
     [ ${#tabs[@]} -eq 1 ] && \
       echo 'exit' | sqlplus -SL ${conn} @t ${tab[0]} \
       && break
