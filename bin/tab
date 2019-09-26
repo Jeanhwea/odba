@@ -9,7 +9,7 @@ tabs=($(sqlplus -SL ${conn} < dt.sql | sed '1,/---/d' | awk '{print $1}'))
 
 PS3='Enter number to select, s to skip: '
 while [ ${#tabs[@]} -gt 0 ]; do
-  select tab in ${tabs[@]}; do break; done
+  echo 1 | select tab in ${tabs[@]}; do break; done
   if [ "${tab}" != '' ]; then
     echo 'exit' | sqlplus -SL ${conn} @t ${tab} && break
   else
