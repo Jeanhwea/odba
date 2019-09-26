@@ -14,8 +14,8 @@ select tab in ${tabs[@]}; do
   else
     read -p 'filter with: ' ans
     tabs=($(echo ${tabs[@]} | tr ' ' '\n' | grep -i "${ans}"))
-    [ ${#tabs[@]} -eq 1 ] && \
-      echo 'exit' | sqlplus -SL ${conn} @t ${tab[0]} \
-      && break
+    if [ ${#tabs[@]} -eq 1 ]; then
+      echo 'exit' | sqlplus -SL ${conn} @t ${tabs[0]} && break
+    fi
   fi
 done
