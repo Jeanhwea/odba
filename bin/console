@@ -23,4 +23,6 @@ else
   conn=${conns[0]}
 fi
 
-echo "Connect to ${conn}"
+cd ${ROOT} && \
+  echo "Connect to ${conn} in ${pwd}" && \
+  ${SQLPLUS} ${conn}
