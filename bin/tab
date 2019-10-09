@@ -7,28 +7,17 @@ source "${ROOT}/bin/setup"
 cd ${ROOT} && echo "Connect to ${conn} in $(pwd)"
 tabs=($(sqlplus -SL ${conn} < dt.sql | sed '1,/---/d' | awk '{print $1}'))
 
-PS3='Enter number to select, s to skip: '
+PS3='Enter number to select a table name: '
 while [ ${#tabs[@]} -gt 0 ]; do
   select tab in ${tabs[@]}; do
-    if [ "${tab}" != '' ]; then
-      yes 'exit' | sqlplus -SL ${conn} @t ${tab}
-    else
-      tabs=($(echo ${tabs[@]} | tr ' ' '\n' | grep -i "${REPLY}"))
-    fi
-    break
+    [ "${tab}" == '' ] &&
+      tabs=($(echo ${tabs[@]} | tr ' ' '\n' | grep -i "${REPLY}")) &&
+      break
   done
 
-  if [ ${#tabs[@]} -eq 1 ]; then
+  if [ "${tab}" != '' ]; then
+    yes 'exit' | sqlplus -SL ${conn} @t ${tab} && break
+  elif [ ${#tabs[@]} -eq 1 ]; then
     yes 'exit' | sqlplus -SL ${conn} @t ${tabs[0]} && break
   fi
-
-  # if [ "${tab}" != '' ]; then
-  #   yes 'exit' | sqlplus -SL ${conn} @t ${tab} && break
-  # else
-  #   read -p 'Filter tables with: ' ans
-  #   tabs=($(echo ${tabs[@]} | tr ' ' '\n' | grep -i "${ans}"))
-  #   if [ ${#tabs[@]} -eq 1 ]; then
-  #     yes 'exit' | sqlplus -SL ${conn} @t ${tabs[0]} && break
-  #   fi
-  # fi
 done
