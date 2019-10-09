@@ -10,14 +10,17 @@ tabs=($(sqlplus -SL ${conn} < dt.sql | sed '1,/---/d' | awk '{print $1}'))
 PS3='Enter number to select a table name: '
 while [ ${#tabs[@]} -gt 0 ]; do
   select tab in ${tabs[@]}; do
-    [ "${tab}" == '' ] &&
-      tabs=($(echo ${tabs[@]} | tr ' ' '\n' | grep -i "${REPLY}")) &&
-      break
+    if [ "${tab}" == '' ]; then
+      tabs=($(echo ${tabs[@]} | tr ' ' '\n' | grep -i "${REPLY}"))
+    fi
+    break
   done
 
   if [ "${tab}" != '' ]; then
     yes 'exit' | sqlplus -SL ${conn} @t ${tab} && break
-  elif [ ${#tabs[@]} -eq 1 ]; then
+  fi
+
+  if [ ${#tabs[@]} -eq 1 ]; then
     yes 'exit' | sqlplus -SL ${conn} @t ${tabs[0]} && break
   fi
 done
