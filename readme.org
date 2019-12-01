@@ -1,30 +1,42 @@
-#+TITLE: Oracle Database Admin
+#+TITLE: Oracle DBA scripts
 #+AUTHOR: Jinghui Hu
 #+EMAIL: hujinghui@buaa.edu.cn
 #+DATE: <2019-08-30 Fri 05:00:50>
-#+HTML_LINK_UP: ../readme.html
-#+HTML_LINK_HOME: ../index.html
-#+TAGS: odba oracle dba admin scripts
 
 
-* Execute SQL file from shell
-  #+BEGIN_SRC sh
-    echo exit | sqlplus -S user/pass@host:port/sid @file[.sql]
-    sqlplus -S user/pass@host:port/sid < file.sql
-  #+END_SRC
+* Pre-Actions
 
-  For example, list all tables from shell
-  #+BEGIN_SRC sh
-    sqlplus -SL user/pass@host:port/sid < dt.sql | sed '0,/^--/d;s/ .*$//g' | column
-  #+END_SRC
+** Setup ~.dir-locals.el~
+   Create ~.dir-locals.el~, then add this lisp codes.
 
-* List Database Structures
-  - @d - display tables, views and sequences
-  - @da - display all tables
-  - @db - display all tablespaces
-  - @dt - display user tables
-  - @ds - display user sequences
-  - @dv - display user views
+   #+BEGIN_SRC elisp
+     ((sql-mode .
+        ((eval . (sql-set-product 'oracle))
+          (sql-user . "username")
+          (sql-password . "password")
+          (sql-database . "127.0.0.1:1521/sid"))))
+   #+END_SRC
 
-* Table related scripts
-  - @t <tablename> - describe table
+* Commands
+
+** Execute SQL file from shell
+   #+BEGIN_SRC sh
+     echo exit | sqlplus -S user/pass@host:port/sid @file[.sql]
+     sqlplus -S user/pass@host:port/sid < file.sql
+   #+END_SRC
+
+   For example, list all tables from shell
+   #+BEGIN_SRC sh
+     sqlplus -SL user/pass@host:port/sid < dt.sql | sed '0,/^--/d;s/ .*$//g' | column
+   #+END_SRC
+
+** List Database Structures
+   - @d - display tables, views and sequences
+   - @da - display all tables
+   - @db - display all tablespaces
+   - @dt - display user tables
+   - @ds - display user sequences
+   - @dv - display user views
+
+** Table related scripts
+   - @t <tablename> - describe table
