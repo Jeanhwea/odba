@@ -16,7 +16,7 @@ set datfile=%datadir%\%filetag%_export.dmp
 set userid=system/oracle@%server%/%sid%
 
 echo Export from %userid% > %logfile%
-exp PARFILE=export-params.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
+exp PARFILE=params-export.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
 echo Save log to %logfile%
 
 set zipfile=%filetag%_export.zip

@@ -16,5 +16,5 @@ set datfile=%datadir%\data.dmp
 set userid=system/oracle@%server%/%sid%
 
 echo Import to %userid% > %logfile%
-imp PARFILE=import-params.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
+imp PARFILE=params-import.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
 echo Save log to %logfile%
