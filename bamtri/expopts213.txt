@@ -1,4 +1,3 @@
-USERID=bamtri_mes/bamtri_mes@192.168.0.213/ora10g
 BUFFER=1048576
 OWNER=bamtri_mes
 GRANTS=y
