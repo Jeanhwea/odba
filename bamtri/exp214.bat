@@ -1,9 +1,17 @@
 @echo off
-set tag=%date:~0,4%%date:~5,2%%date:~8,2%
-set logfile=exp214.log
-set datfile=data.dmp
+set NLS_LANG=.ZHS16GBK
 
-exp PARFILE=expopts214.txt LOG=%logfile% FILE=%datfile%
-zip data%tag%.zip %datfile% %logfile%
-rm %datfile% %logfile%
-mv data%tag%.zip dump
+set datetag=%date:~0,4%%date:~5,2%%date:~8,2%
+set timetag=%time:~0,2%%time:~3,2%%time:~6,2%
+set filetag=%datetag%_%timetag%
+
+set logfile=%filetag%_export.log
+set datfile=%filetag%_export.dmp
+set server=192.168.0.213
+set userid=bamtri_mes/bamtri_mes@%server%/ora10g
+
+set datadir=data
+
+echo Export from %userid%
+exp PARFILE=expopts213.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
+echo Save log to %logfile%
