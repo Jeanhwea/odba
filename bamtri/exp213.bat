@@ -12,7 +12,7 @@ set server=192.168.0.213
 set userid=bamtri_mes/bamtri_mes@%server%/ora10g
 
 echo Export from %userid% > %logfile%
-exp PARFILE=expopts213.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
+exp PARFILE=export-params.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
 echo Save log to %logfile%
 
 rem zip data%tag%.zip %datfile% %logfile%

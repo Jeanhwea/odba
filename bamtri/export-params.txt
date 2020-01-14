@@ -1,6 +1,5 @@
-USERID=bamtri_mes/bamtri_mes@192.168.0.214/ora10g
-BUFFER=1048576
 OWNER=bamtri_mes
+BUFFER=1048576
 GRANTS=y
 INDEXES=y
 RECORD=y

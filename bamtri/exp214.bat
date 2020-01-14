@@ -13,5 +13,5 @@ set userid=bamtri_mes/bamtri_mes@%server%/ora10g
 set datadir=data
 
 echo Export from %userid%
-exp PARFILE=expopts213.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
+exp PARFILE=export-params.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
 echo Save log to %logfile%
