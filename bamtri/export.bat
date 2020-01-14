@@ -1,4 +1,9 @@
 @echo off
+rem ----------------------------------------------------------------------------
+set server=192.168.0.213
+set sid=ora11g
+rem ----------------------------------------------------------------------------
+
 set NLS_LANG=.ZHS16GBK
 
 set datetag=%date:~0,4%%date:~5,2%%date:~8,2%
@@ -8,8 +13,7 @@ set filetag=%datetag%_%timetag%
 set datadir=dump
 set logfile=%datadir%\%filetag%_export.log
 set datfile=%datadir%\%filetag%_export.dmp
-set server=192.168.0.213
-set userid=bamtri_mes/bamtri_mes@%server%/ora10g
+set userid=bamtri_mes/bamtri_mes@%server%/%sid%
 
 echo Export from %userid% > %logfile%
 exp PARFILE=export-params.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
