@@ -1,6 +1,5 @@
 .dir-locals.el
 tmp/*
 
-bamtri/data/*
-bamtri/*.log
-bamtri/*.dmp
+# ignore all file inside data folder
+*/data/*
