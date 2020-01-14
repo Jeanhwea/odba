@@ -1,6 +1,6 @@
 .dir-locals.el
 tmp/*
 
-bamtri/dump/*
+bamtri/data/*
 bamtri/*.log
 bamtri/*.dmp

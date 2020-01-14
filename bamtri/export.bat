@@ -10,7 +10,7 @@ set datetag=%date:~0,4%%date:~5,2%%date:~8,2%
 set timetag=%time:~0,2%%time:~3,2%%time:~6,2%
 set filetag=%datetag%_%timetag%
 
-set datadir=dump
+set datadir=data
 set logfile=%datadir%\%filetag%_export.log
 set datfile=%datadir%\%filetag%_export.dmp
 set userid=bamtri_mes/bamtri_mes@%server%/%sid%
