@@ -19,6 +19,7 @@ echo Export from %userid% > %logfile%
 exp PARFILE=export-params.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
 echo Save log to %logfile%
 
-rem zip data%tag%.zip %datfile% %logfile%
-rem rm %datfile% %logfile%
-rem mv data%tag%.zip dump
+set zipfile=%filetag%_export.zip
+zip %zipfile% %datfile% %logfile%
+move /y %zipfile% %datadir%
+del %datfile% %logfile%
