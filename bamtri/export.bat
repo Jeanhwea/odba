@@ -13,7 +13,7 @@ set filetag=%datetag%_%timetag%
 set datadir=data
 set logfile=%datadir%\%filetag%_export.log
 set datfile=%datadir%\%filetag%_export.dmp
-set userid=bamtri_mes/bamtri_mes@%server%/%sid%
+set userid=system/oracle@%server%/%sid%
 
 echo Export from %userid% > %logfile%
 exp PARFILE=export-params.txt USERID=%userid% LOG=%logfile% FILE=%datfile%

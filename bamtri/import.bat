@@ -12,7 +12,7 @@ set filetag=%datetag%_%timetag%
 set datadir=data
 set logfile=%datadir%\%filetag%_import.log
 set datfile=%datadir%\data.dmp
-set userid=bamtri_mes/bamtri_mes@%server%/%sid%
+set userid=system/oracle@%server%/%sid%
 
 echo Import to %userid% > %logfile%
 imp PARFILE=import-params.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
