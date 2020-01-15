@@ -20,4 +20,27 @@ show parameter job_queue_process;
 -- alter system set job_queue_processes=10;
 
 -- SGA 值
-show parameter sga;
+-- show parameter sga;
+show parameter sga_max_size;
+show parameter sga_target;
+show parameter db_cache_size;
+show parameter db_keep_cache_size;
+show parameter db_recycle_cache_size;
+
+
+-- alter system set sga_max_size =32000m scope=spfile;
+-- alter system set sga_target =32000m scope=spfile;
+-- alter system set lock_sga =true scope=spfile;
+-- alter system set pre_page_sga=true scope=spfile;
+
+-- alter system set db_cache_size = 12000m scope=spfile;
+-- alter system set db_keep_cache_size = 0 scope=spfile;
+-- alter system set db_recycle_cache_size = 0 scope=spfile;
+
+
+-- PGA 值
+show parameter pga;
+show parameter pga_aggregate_target;
+show parameter statistics_level;
+
+-- alter system set pga_aggregate_target =8000m scope=spfile;
