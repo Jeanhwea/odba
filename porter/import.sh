@@ -23,6 +23,7 @@ LOGFILE="${DATADIR}/${FILETAG}_import.log"
 USERID="${SYSUSER}/${SYSPASS}@${SERVER}/${SID}"
 
 # 导入数据文件
-echo "Import from $USERID" > $LOGFILE
+echo "Import from $USERID"
 imp PARFILE=params-import.txt USERID=$USERID LOG=$LOGFILE FILE=$DATFILE
 echo "Save log to $LOGFILE"
+echo "Import from $USERID" >> $LOGFILE

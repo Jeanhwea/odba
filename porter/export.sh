@@ -23,9 +23,10 @@ LOGFILE="${DATADIR}/${FILETAG}_export.log"
 USERID="${SYSUSER}/${SYSPASS}@${SERVER}/${SID}"
 
 # 导出数据文件
-echo "Export from $USERID" > $LOGFILE
+echo "Export from $USERID"
 exp PARFILE=params-export.txt USERID=$USERID LOG=$LOGFILE FILE=$DATFILE
 echo "Save log to $LOGFILE"
+echo "Export from $USERID" >> $LOGFILE
 
 # 打包压缩文件
 ZIPFILE="${FILETAG}_export.zip"
