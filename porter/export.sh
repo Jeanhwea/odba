@@ -23,7 +23,7 @@ LOGFILE="${DATADIR}/${FILETAG}_export.log"
 USERID="${SYSUSER}/${SYSPASS}@${SERVER}/${SID}"
 
 # 导出数据文件
-echo "Export from $USERID"
+echo "Export from $USERID" > $LOGFILE
 exp PARFILE=params-export.txt USERID=$USERID LOG=$LOGFILE FILE=$DATFILE
 echo "Save log to $LOGFILE"
 
