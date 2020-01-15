@@ -39,7 +39,7 @@ show parameter db_recycle_cache_size;
 
 
 -- PGA 值
-show parameter pga;
+-- show parameter pga;
 show parameter pga_aggregate_target;
 show parameter statistics_level;
 
