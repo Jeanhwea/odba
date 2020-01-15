@@ -2,7 +2,8 @@
 ################################################################################
 SERVER=${SERVER:="127.0.0.1"}
 SID=${SID:="ora11g"}
-USER=${USER:="system/oracle"}
+SYSUSER=${SYSUSER:="system"}
+SYSPASS=${SYSPASS:="oracle"}
 ################################################################################
 
 export TZ='Asia/Shanghai'
@@ -14,7 +15,7 @@ DATADIR=${DATADIR:="data"}
 
 DATFILE="${DATADIR}/bamtri_mes.dmp"
 LOGFILE="${DATADIR}/${FILETAG}_import.log"
-USERID="${USER}@${SERVER}/${SID}"
+USERID="${SYSUSER}/${SYSPASS}@${SERVER}/${SID}"
 
 echo "Import from $USERID"
 imp PARFILE=params-import.txt USERID=$USERID LOG=$LOGFILE FILE=$DATFILE
