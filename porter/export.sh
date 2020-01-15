@@ -1,6 +1,9 @@
 #!/bin/bash
+################################################################################
 SERVER=${SERVER:="127.0.0.1"}
 SID=${SID:="ora11g"}
+USER=${USER:="system/oracle"}
+################################################################################
 
 export TZ='Asia/Shanghai'
 # export NLS_LANG='.AL32UTF8'
@@ -11,7 +14,7 @@ DATADIR=${DATADIR:="data"}
 
 DATFILE="${DATADIR}/${FILETAG}_export.dmp"
 LOGFILE="${DATADIR}/${FILETAG}_export.log"
-USERID="system/oracle@${SERVER}/${SID}"
+USERID="${USER}@${SERVER}/${SID}"
 
 echo "Export from $USERID"
 exp PARFILE=params-export.txt USERID=$USERID LOG=$LOGFILE FILE=$DATFILE

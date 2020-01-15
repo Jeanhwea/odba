@@ -1,6 +1,9 @@
 #!/bin/bash
+################################################################################
 SERVER=${SERVER:="127.0.0.1"}
 SID=${SID:="ora11g"}
+USER=${USER:="system/oracle"}
+################################################################################
 
 export TZ='Asia/Shanghai'
 # export NLS_LANG='.AL32UTF8'
@@ -11,7 +14,7 @@ DATADIR=${DATADIR:="data"}
 
 DATFILE="${DATADIR}/bamtri_mes.dmp"
 LOGFILE="${DATADIR}/${FILETAG}_import.log"
-USERID="system/oracle@${SERVER}/ora11g"
+USERID="${USER}@${SERVER}/${SID}"
 
 echo "Import from $USERID"
 imp PARFILE=params-import.txt USERID=$USERID LOG=$LOGFILE FILE=$DATFILE

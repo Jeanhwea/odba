@@ -1,7 +1,8 @@
 @echo off
 rem ----------------------------------------------------------------------------
-set server=192.168.0.138
-set sid=ora11g
+set server=192.168.0.215
+set sid=ora10g
+set user=system/dba
 rem ----------------------------------------------------------------------------
 
 set NLS_LANG=.ZHS16GBK
@@ -13,7 +14,7 @@ set filetag=%datetag%_%timetag%
 set datadir=data
 set logfile=%datadir%\%filetag%_import.log
 set datfile=%datadir%\data.dmp
-set userid=system/oracle@%server%/%sid%
+set userid=%user%@%server%/%sid%
 
 echo Import to %userid% > %logfile%
 imp PARFILE=params-import.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
