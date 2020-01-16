@@ -8,24 +8,24 @@ SET TERMOUT ON;
 
 TTITLE LEFT 'List of User Sessions' SKIP 1 LINE;
 -- COLUMN logintype FORMAT A10 HEADING 'Type';
-COLUMN logontime HEADING 'Login Time';
-COLUMN username FORMAT A12 HEADING 'User' TRUNCATE;
-COLUMN scmname FORMAT A12 HEADING 'Schema' TRUNCATE;
-COLUMN servid FORMAT A12 HEADING 'SID';
-COLUMN osid FORMAT A32 HEADING 'User@Hostname';
-COLUMN program FORMAT A24 HEADING 'Program' TRUNCATE;
-COLUMN status FORMAT A8 HEADING 'Status' TRUNCATE;
-COLUMN state FORMAT A8 HEADING 'State' TRUNCATE;
+COLUMN col01 HEADING 'Login Time';
+COLUMN col02 FORMAT A12 HEADING 'User' TRUNCATE;
+COLUMN col03 FORMAT A12 HEADING 'Schema' TRUNCATE;
+COLUMN col04 FORMAT A12 HEADING 'SID';
+COLUMN col05 FORMAT A32 HEADING 'User@Hostname';
+COLUMN col06 FORMAT A24 HEADING 'Program' TRUNCATE;
+-- COLUMN status FORMAT A8 HEADING 'Status' TRUNCATE;
+-- COLUMN state FORMAT A8 HEADING 'State' TRUNCATE;
 
 SELECT
-  sess.LOGON_TIME + 8/24 AS logontime,
-  sess.USERNAME AS username,
-  sess.SCHEMANAME AS scmname,
-  sess.SERVICE_NAME AS servid,
-  sess.OSUSER || '@' || sess.MACHINE AS osid,
-  -- sess.STATUS AS status,
-  -- sess.STATE AS state,
-  sess.PROGRAM AS program
-  FROM V$SESSION sess
- WHERE sess.TYPE = 'USER'
- ORDER BY logontime DESC, username;
+  t1.LOGON_TIME AS col01,
+  t1.USERNAME AS col02,
+  t1.SCHEMANAME AS col03,
+  t1.SERVICE_NAME AS col04,
+  t1.OSUSER || '@' || t1.MACHINE AS col05,
+  -- t1.STATUS AS status,
+  -- t1.STATE AS state,
+  t1.PROGRAM AS col06
+  FROM V$SESSION t1
+ WHERE t1.TYPE = 'USER'
+ ORDER BY col01 DESC, col02;
