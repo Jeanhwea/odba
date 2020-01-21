@@ -37,24 +37,19 @@ echo Save log to %logfile%
 
 rem 写导出的说明文件
 set readme=readme.txt
-echo The file contains some export information  > %readme%
-echo                                           >> %readme%
-echo Status of Host                            >> %readme%
+echo Export configurations                      > %readme%
 echo ----------------------------------------  >> %readme%
 echo Host Name     %host%                      >> %readme%
 echo Base Foleder  %here%                      >> %readme%
 echo Start         %datetag% %timetag%         >> %readme%
-echo                                           >> %readme%
-echo Current Environments                      >> %readme%
 echo ----------------------------------------  >> %readme%
 echo ORACLE_HOME   %ORACLE_HOME%               >> %readme%
 echo NLS_LANG      %NLS_LANG%                  >> %readme%
-echo                                           >> %readme%
-echo Status of Database                        >> %readme%
 echo ----------------------------------------  >> %readme%
 echo Server        %server%                    >> %readme%
 echo SID           %sid%                       >> %readme%
 echo Export User   %sysuser%                   >> %readme%
+echo ----------------------------------------  >> %readme%
 
 rem 打包压缩文件
 set zipfile=%filetag%_export.zip
