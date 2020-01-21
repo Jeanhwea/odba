@@ -7,7 +7,7 @@
 -- show parameter sessions;
 
 alter system set processes=1024 scope=spfile;
-alter system set sessions=450 scope=spfile;
+alter system set sessions=1568 scope=spfile;
 
 -- 更改游标数目
 -- show parameter open_cursors;
@@ -17,3 +17,9 @@ alter system set sessions=450 scope=spfile;
 -- 设备 JOB 值
 -- show parameter job_queue_process;
 alter system set job_queue_processes=10;
+
+
+-- alter system set sga_max_size=32000m scope=spfile;
+-- alter system set sga_target=32000m scope=spfile;
+-- alter system set lock_sga=true scope=spfile;
+-- alter system set pre_page_sga=true scope=spfile;
