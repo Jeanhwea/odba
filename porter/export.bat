@@ -33,19 +33,21 @@ set userid=%sysuser%/%syspass%@%server%/%sid%
 
 rem 打印导出的配置
 set readme=readme.txt
-echo Export configurations                      > %readme%
-echo ----------------------------------------  >> %readme%
-echo Host Name     %host%                      >> %readme%
-echo Base Foleder  %here%                      >> %readme%
-echo Start         %datetag% %timetag%         >> %readme%
-echo ----------------------------------------  >> %readme%
-echo ORACLE_HOME   %ORACLE_HOME%               >> %readme%
-echo NLS_LANG      %NLS_LANG%                  >> %readme%
-echo ----------------------------------------  >> %readme%
-echo Server        %server%                    >> %readme%
-echo SID           %sid%                       >> %readme%
-echo Export User   %sysuser%                   >> %readme%
-echo ----------------------------------------  >> %readme%
+echo ---------------------------------------------------------- >> %readme%
+echo Export configurations                                       > %readme%
+echo ---------------------------------------------------------- >> %readme%
+echo Host Name     %host%                                       >> %readme%
+echo Base Foleder  %here%                                       >> %readme%
+echo Start Date    %datetag:~1,4%-%datetag:~5,2%-%datetag:~7,2% >> %readme%
+echo Start Time    %timetag:~1,2%:%timetag:~3,2%:%timetag:~5,2% >> %readme%
+echo ---------------------------------------------------------- >> %readme%
+echo ORACLE_HOME   %ORACLE_HOME%                                >> %readme%
+echo NLS_LANG      %NLS_LANG%                                   >> %readme%
+echo ----------------------------------------                   >> %readme%
+echo Server        %server%                                     >> %readme%
+echo SID           %sid%                                        >> %readme%
+echo Export User   %sysuser%                                    >> %readme%
+echo ---------------------------------------------------------- >> %readme%
 type %readme%
 
 rem 导出数据文件
