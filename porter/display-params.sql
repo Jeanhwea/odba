@@ -19,6 +19,12 @@ show parameter open_cursors;
 show parameter job_queue_process;
 -- alter system set job_queue_processes=10;
 
+-- 初始化内存参数
+show parameter memory_target;
+show parameter memory_max_target;
+-- alter system set memory_max_target=22000m scope=spfile;
+-- alter system set memory_target=22000m scope=spfile;
+
 -- SGA 值
 -- show parameter sga;
 show parameter sga_max_size;
