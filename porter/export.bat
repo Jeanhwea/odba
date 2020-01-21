@@ -2,11 +2,16 @@
 rem ----------------------------------------------------------------------------
 rem 启动前需要修改的配置
 rem ----------------------------------------------------------------------------
-set server=192.168.0.139
-set sid=ora11g
+set server=192.168.0.213
+set sid=ora10g
 set sysuser=system
-set syspass=oracle
+set syspass=dba
 rem ----------------------------------------------------------------------------
+
+rem 配置主机信息
+set here=%~dp0
+set driver=%~d0
+for /f %%a in ('hostname') do set host=%%a
 
 rem 环境变量
 set NLS_LANG=.ZHS16GBK
@@ -29,10 +34,30 @@ rem 导出数据文件
 echo Export from %userid%
 exp PARFILE=params-export.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
 echo Save log to %logfile%
-echo Export from %userid% >> %logfile%
+
+rem 写导出的说明文件
+set readme=readme.txt
+echo The file contains some export information  > %readme%
+echo                                           >> %readme%
+echo Status of Host                            >> %readme%
+echo ----------------------------------------  >> %readme%
+echo Host Name     %host%                      >> %readme%
+echo Base Foleder  %here%                      >> %readme%
+echo Start         %datetag% %timetag%         >> %readme%
+echo                                           >> %readme%
+echo Current Environments                      >> %readme%
+echo ----------------------------------------  >> %readme%
+echo ORACLE_HOME   %ORACLE_HOME%               >> %readme%
+echo NLS_LANG      %NLS_LANG%                  >> %readme%
+echo                                           >> %readme%
+echo Status of Database                        >> %readme%
+echo ----------------------------------------  >> %readme%
+echo Server        %server%                    >> %readme%
+echo SID           %sid%                       >> %readme%
+echo Export User   %sysuser%                   >> %readme%
 
 rem 打包压缩文件
 set zipfile=%filetag%_export.zip
-zip %zipfile% %datfile% %logfile%
+zip %zipfile% %datfile% %logfile% %readme%
 move /y %zipfile% %datadir%
-del %datfile% %logfile%
+del %datfile% %logfile% %readme%
