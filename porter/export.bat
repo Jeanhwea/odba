@@ -30,12 +30,8 @@ set logfile=%datadir%\%filetag%_export.log
 set datfile=%datadir%\%filetag%_export.dmp
 set userid=%sysuser%/%syspass%@%server%/%sid%
 
-rem 导出数据文件
-echo Export from %userid%
-exp PARFILE=params-export.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
-echo Save log to %logfile%
 
-rem 写导出的说明文件
+rem 打印导出的配置
 set readme=readme.txt
 echo Export configurations                      > %readme%
 echo ----------------------------------------  >> %readme%
@@ -50,6 +46,11 @@ echo Server        %server%                    >> %readme%
 echo SID           %sid%                       >> %readme%
 echo Export User   %sysuser%                   >> %readme%
 echo ----------------------------------------  >> %readme%
+type %readme%
+
+rem 导出数据文件
+exp PARFILE=params-export.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
+echo Save log to %logfile%
 
 rem 打包压缩文件
 set zipfile=%filetag%_export.zip
