@@ -30,24 +30,23 @@ set logfile=%datadir%\%filetag%_export.log
 set datfile=%datadir%\%filetag%_export.dmp
 set userid=%sysuser%/%syspass%@%server%/%sid%
 
-
 rem 打印导出的配置
-set readme=readme.txt
-echo ---------------------------------------------------------- >> %readme%
-echo Export configurations                                       > %readme%
-echo ---------------------------------------------------------- >> %readme%
-echo Host Name     %host%                                       >> %readme%
-echo Base Foleder  %here%                                       >> %readme%
-echo Start Date    %datetag:~1,4%-%datetag:~5,2%-%datetag:~7,2% >> %readme%
-echo Start Time    %timetag:~1,2%:%timetag:~3,2%:%timetag:~5,2% >> %readme%
-echo ---------------------------------------------------------- >> %readme%
-echo ORACLE_HOME   %ORACLE_HOME%                                >> %readme%
-echo NLS_LANG      %NLS_LANG%                                   >> %readme%
-echo ----------------------------------------                   >> %readme%
-echo Server        %server%                                     >> %readme%
-echo SID           %sid%                                        >> %readme%
-echo Export User   %sysuser%                                    >> %readme%
-echo ---------------------------------------------------------- >> %readme%
+set readme=%datadir%\readme.txt
+echo ------------------------------------------------------------  > %readme%
+echo Configurations for exporting                                 >> %readme%
+echo ------------------------------------------------------------ >> %readme%
+echo   ORACLE_HOME   %ORACLE_HOME%                                >> %readme%
+echo   NLS_LANG      %NLS_LANG%                                   >> %readme%
+echo ------------------------------------------------------------ >> %readme%
+echo   Host Name     %host%                                       >> %readme%
+echo   Base Foleder  %here%                                       >> %readme%
+echo   Start Date    %datetag:~0,4%-%datetag:~4,2%-%datetag:~6,2% >> %readme%
+echo   Start Time    %timetag:~0,2%:%timetag:~2,2%:%timetag:~4,2% >> %readme%
+echo ------------------------------------------------------------ >> %readme%
+echo   Server        %server%                                     >> %readme%
+echo   SID           %sid%                                        >> %readme%
+echo   Export User   %sysuser%                                    >> %readme%
+echo ------------------------------------------------------------ >> %readme%
 type %readme%
 
 rem 导出数据文件
@@ -55,7 +54,6 @@ exp PARFILE=params-export.txt USERID=%userid% LOG=%logfile% FILE=%datfile%
 echo Save log to %logfile%
 
 rem 打包压缩文件
-set zipfile=%filetag%_export.zip
+set zipfile=%datadir%\%filetag%_export.zip
 zip %zipfile% %datfile% %logfile% %readme%
-move /y %zipfile% %datadir%
 del %datfile% %logfile% %readme%

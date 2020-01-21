@@ -1,4 +1,5 @@
 #!/bin/bash
+HERE=`cd $(dirname $0); pwd`
 ################################################################################
 # 启动前需要修改的配置
 ################################################################################
@@ -22,14 +23,31 @@ DATFILE="${DATADIR}/${FILETAG}_export.dmp"
 LOGFILE="${DATADIR}/${FILETAG}_export.log"
 USERID="${SYSUSER}/${SYSPASS}@${SERVER}/${SID}"
 
+# 打印导出的配置
+README="${DATADIR}/readme.txt"
+echo "------------------------------------------------------------"  > $README
+echo "Configurations for exporting                                " >> $README
+echo "------------------------------------------------------------" >> $README
+echo "  ORACLE_HOME   $ORACLE_HOME                                " >> $README
+echo "  NLS_LANG      $NLS_LANG                                   " >> $README
+echo "------------------------------------------------------------" >> $README
+echo "  Host Name     $(hostname)                                 " >> $README
+echo "  Base Foleder  $HERE                                       " >> $README
+echo "  Start Date    $(date +'%Y-%m-%d')                         " >> $README
+echo "  Start Time    $(date +'%H:%M:%S')                         " >> $README
+echo "------------------------------------------------------------" >> $README
+echo "  Server        $SERVER                                     " >> $README
+echo "  SID           $SID                                        " >> $README
+echo "  Export User   $SYSUSER                                    " >> $README
+echo "------------------------------------------------------------" >> $README
+cat $README
+
 # 导出数据文件
-echo "Export from $USERID"
 exp PARFILE=params-export.txt USERID=$USERID LOG=$LOGFILE FILE=$DATFILE
 echo "Save log to $LOGFILE"
 echo "Export from $USERID" >> $LOGFILE
 
 # 打包压缩文件
-ZIPFILE="${FILETAG}_export.zip"
-zip $ZIPFILE $DATFILE $LOGFILE
-mv $ZIPFILE $DATADIR
-rm $DATFILE $LOGFILE
+ZIPFILE="${DATADIR}/${FILETAG}_export.zip"
+zip $ZIPFILE $DATFILE $LOGFILE $README
+rm $DATFILE $LOGFILE $README
