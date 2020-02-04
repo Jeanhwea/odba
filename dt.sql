@@ -1,22 +1,20 @@
-SET LINESIZE 255;
-SET PAGESIZE 50000;
-SET FEEDBACK OFF;
-SET TAB OFF;
+@preaction;
+ttitle left 'List of User Tables' skip 1 line;
+column tablespace_name format a20 heading 'Table Space Name';
+column table_name format a32 heading 'Table Name';
+column table_comments format a80 heading 'Comments' truncate;
 
-TTITLE LEFT 'List of User Tables' SKIP 1 LINE;
-COLUMN tabname FORMAT A32 HEADING 'Table Name';
-COLUMN tabcmt FORMAT A80 HEADING 'Comments' TRUNCATE;
+-- select max(length(table_name)) from user_tables;
+-- select max(length(comments)) from user_tab_comments;
 
--- SELECT MAX(LENGTH(TABLE_NAME)) FROM USER_TABLES;
--- SELECT MAX(LENGTH(COMMENTS)) FROM USER_TAB_COMMENTS;
-
-SELECT
-  utbs.TABLE_NAME AS tabname,
-  (
-    SELECT REPLACE(REPLACE(utbc.COMMENTS, CHR(13), ''), CHR(10), '\n')
-      FROM USER_TAB_COMMENTS utbc
-     WHERE utbc.TABLE_NAME = utbs.TABLE_NAME AND
-           ROWNUM <= 1
-  ) AS tabcmt
-  FROM USER_TABLES utbs
- ORDER BY tabname;
+select
+  -- a.tablespace_name as tablespace_name,
+  a.table_name as table_name,
+  replace(replace(b.comments, chr(13), ''), chr(10), '_rn_') as table_comments
+from
+  user_tables a,
+  User_tab_comments b
+where
+  a.table_name = b.table_name
+order by
+  table_name;

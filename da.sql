@@ -1,18 +1,18 @@
-SET LINESIZE 255;
-SET PAGESIZE 50000;
-SET FEEDBACK OFF;
-SET TAB OFF;
+@preaction;
+ttitle left 'List of User Tables' skip 1 line;
+column tablespace_name format a20 heading 'Tablespace';
+column table_name format a32 heading 'Table';
+column table_status format a16 heading 'Status';
+column table_comments format a80 heading 'Comments' truncate;
 
-TTITLE LEFT 'List of User Tables' SKIP 1 LINE;
-COLUMN tsname FORMAT A20 HEADING 'Tablespace';
-COLUMN tabname FORMAT A32 HEADING 'Tablename';
-COLUMN tabcmt FORMAT A80 HEADING 'Comments' TRUNCATE;
-
-SELECT
-  atbs.TABLESPACE_NAME AS tsname,
-  atbs.TABLE_NAME AS tabname,
-  REPLACE(REPLACE(utbcmts.COMMENTS, CHR(13), ''), CHR(10), '\n') AS tabcmt
-  FROM ALL_TABLES atbs
-         LEFT JOIN USER_TAB_COMMENTS utbcmts
-             ON atbs.TABLE_NAME = utbcmts.TABLE_NAME
- ORDER BY tsname, tabname;
+select
+  a.tablespace_name as tablespace_name,
+  a.table_name as table_name,
+  -- a.status as table_status,
+  replace(replace(b.comments, chr(13), ''), chr(10), '\n') as table_comments
+from
+  all_tables a
+  left join user_tab_comments b on a.table_name = b.table_name
+order by
+  tablespace_name,
+  table_name;
