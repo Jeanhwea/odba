@@ -37,6 +37,6 @@ select
      where t1.tablespace_name = t5.tablespace_name
   ) as tspfile
   from user_tablespaces t1
- where t1.allocation_type = 'system'
+ where lower(t1.allocation_type) = 'system'
  group by t1.tablespace_name
  order by tspname;
