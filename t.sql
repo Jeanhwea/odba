@@ -65,4 +65,4 @@ select
   ) as colcmt
   from user_tab_columns t1
  where lower(t1.table_name) = lower('&tablename')
- order by t1.column_id;
+ order by ispk, colnull, t1.column_id;
