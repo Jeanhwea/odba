@@ -11,7 +11,7 @@ column colname format a25  heading 'Name';
 column coltype format a10  heading 'Type';
 column collen  format 9999 heading 'Len';
 column colpcs  format 9999 heading 'Prec';
-column colnull format a2   heading 'NN';
+column isnull  format a2   heading 'NN';
 column ispk    format a2   heading 'PK';
 column isuniq  format a2   heading 'UQ';
 column colcmt  format a80  heading 'Comment' truncate;
@@ -51,7 +51,7 @@ select
     group by t5.constraint_name
    having count(1) = 1)
     as isuniq,
-  decode(lower(t1.nullable), 'n', '*', '') as colnull,
+  decode(lower(t1.nullable), 'n', '*', '') as isnull,
   t1.column_name as colname,
   t1.data_type as coltype,
   t1.data_length as collen,
@@ -65,4 +65,4 @@ select
   ) as colcmt
   from user_tab_columns t1
  where lower(t1.table_name) = lower('&tablename')
- order by ispk, colnull, t1.column_id;
+ order by ispk, isnull, t1.column_id;
