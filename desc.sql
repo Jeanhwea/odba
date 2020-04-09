@@ -3,11 +3,11 @@ set verify off;
 define tablename = &1;
 
 ttitle left 'Columns of Table [&tablename]' skip 1 line;
-column colname format a32 heading 'Name';
-column coltype format a16 heading 'Type';
+column colname format a32    heading 'Name';
+column coltype format a16    heading 'Type';
 column collen  format 999999 heading 'Length';
-column isnul   format a8 heading 'Nullable';
-column colcmt  format a80 heading 'Comments' truncate;
+column isnul   format a8     heading 'Nullable';
+column colcmt  format a80    heading 'Comments' truncate;
 
 select
   t1.column_name as colname,

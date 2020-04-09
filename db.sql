@@ -9,7 +9,7 @@ column tspsize format a10 heading 'Total';
 column tspubts format a10 heading 'User Size';
 column tspmbts format a10 heading 'Max Size';
 column tspfree format a10 heading 'Free';
-column tspext  format a8 heading 'Extent?';
+column tspext  format a8  heading 'Extent?';
 column tspfile format a80 heading 'Datafile';
 
 -- desc user_tablespaces

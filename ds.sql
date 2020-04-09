@@ -1,18 +1,18 @@
-SET LINESIZE 255;
-SET PAGESIZE 50000;
-SET FEEDBACK OFF;
-SET TAB OFF;
+set linesize 255;
+set pagesize 50000;
+set feedback off;
+set tab off;
 
-TTITLE LEFT 'List of User Sequences' SKIP 1 LINE;
-COLUMN seqname FORMAT A32 HEADING 'Sequence Name';
-COLUMN seqstep FORMAT 999999 HEADING 'Step';
-COLUMN seqlast FORMAT 99999999999 HEADING 'Last Number';
-COLUMN seqcache FORMAT 999999 HEADING 'Cache Size';
+ttitle left 'List of User Sequences' skip 1 line;
+column seqname  format a32         heading 'Sequence';
+column seqstep  format 999999      heading 'Step';
+column seqlast  format 99999999999 heading 'Last Number';
+column seqcache format 999999      heading 'Cache Size';
 
-SELECT
-  usq.SEQUENCE_NAME AS seqname,
-  usq.INCREMENT_BY AS seqstep,
-  usq.LAST_NUMBER AS seqlast,
-  usq.CACHE_SIZE AS seqcache
-  FROM USER_SEQUENCES usq
- ORDER BY seqname;
+select
+  t1.sequence_name as seqname,
+  t1.increment_by as seqstep,
+  t1.last_number as seqlast,
+  t1.cache_size as seqcache
+  from user_sequences t1
+ order by seqname;
