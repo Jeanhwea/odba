@@ -1,17 +1,17 @@
-SET LINESIZE 255;
-SET PAGESIZE 50000;
-SET FEEDBACK OFF;
-SET TAB OFF;
+set linesize 255;
+set pagesize 50000;
+set feedback off;
+set tab off;
 
--- TTITLE CENTER 'List of Tables' SKIP 1 LINE;
--- COLUMN no FORMAT 9999 HEADING 'No.';
-COLUMN PROPERTY_NAME FORMAT A32 HEADING 'Name';
-COLUMN PROPERTY_VALUE FORMAT A32 HEADING 'Value';
-COLUMN DESCRIPTION FORMAT A80 HEADING 'Description' TRUNCATE;
+-- ttitle center 'list of tables' skip 1 line;
+-- column no format 9999 heading 'no.';
+column propname format a32 heading 'Name';
+column propval  format a32 heading 'Value';
+column dscp     format a80 heading 'Description' truncate;
 
-SELECT PROPERTY_NAME, PROPERTY_VALUE, DESCRIPTION
-  FROM DATABASE_PROPERTIES WHERE PROPERTY_NAME LIKE 'NLS_%';
-
-SELECT PROPERTY_NAME, PROPERTY_VALUE, DESCRIPTION
-  FROM DATABASE_PROPERTIES
- WHERE PROPERTY_NAME IN ('NLS_CHARACTERSET', 'NLS_LANGUAGE', 'NLS_TERRITORY');
+select property_name as propname,
+       property_value as propval,
+       description as dscp
+  from database_properties
+ where lower(property_name) like 'nls_%';
+-- lower(property_name) in ('nls_characterset', 'nls_language', 'nls_territory');
