@@ -1,18 +1,18 @@
 -- setup line
-SET TERMOUT OFF;
+set termout off;
 
-SET LONG 32;
-SET PAGESIZE 50000;
+set long 32;
+set pagesize 50000;
 
 -- set vim as default editor
-DEFINE _EDITOR=vim
+define _editor=vim
 
 -- setup line width to terminal screen width
-HOST echo "SET LINESIZE $(./termwidth.sh)" > .tmp.sql;
+host echo "set linesize $(./termwidth.sh)" > .tmp.sql;
 @.tmp.sql;
-HOST rm .tmp.sql;
+host rm .tmp.sql;
 
 -- change data format to common readable format
-ALTER SESSION SET NLS_DATE_FORMAT = 'yyyy-mm-dd hh24:mi:ss';
+alter session set nls_date_format = 'yyyy-mm-dd hh24:mi:ss';
 
-SET TERMOUT ON;
+set termout on;

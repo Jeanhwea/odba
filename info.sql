@@ -1,17 +1,17 @@
-SET LINESIZE 255;
-SET PAGESIZE 50000;
-SET FEEDBACK OFF;
-SET TAB OFF;
+set linesize 255;
+set pagesize 50000;
+set feedback off;
+set tab off;
 
-TTITLE LEFT 'Database Server Information' SKIP 1 LINE;
-COLUMN col01 FORMAT A26 HEADING 'Host';
-COLUMN col02 FORMAT A16 HEADING 'IP';
-COLUMN col03 FORMAT A14 HEADING 'DB/Session';
-COLUMN col04 FORMAT A10 HEADING 'SID';
+ttitle left 'database server information' skip 1 line;
+column col01 format a26 heading 'host';
+column col02 format a16 heading 'ip';
+column col03 format a14 heading 'db/session';
+column col04 format a10 heading 'sid';
 
-SELECT
-  UTL_INADDR.GET_HOST_NAME AS col01,
-  UTL_INADDR.GET_HOST_ADDRESS AS col02,
-  DBTIMEZONE || '/' || SESSIONTIMEZONE AS col03,
-  (SELECT NAME FROM V$DATABASE) AS col04
-  FROM DUAL;
+select
+  utl_inaddr.get_host_name as col01,
+  utl_inaddr.get_host_address as col02,
+  dbtimezone || '/' || sessiontimezone as col03,
+  (select name from v$database) as col04
+  from dual;
