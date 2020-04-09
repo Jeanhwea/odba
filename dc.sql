@@ -3,8 +3,7 @@ set pagesize 50000;
 set feedback off;
 set tab off;
 
--- ttitle center 'list of tables' skip 1 line;
--- column no format 9999 heading 'no.';
+ttitle left 'List of NLS Properties' skip 1 line;
 column propname format a32 heading 'Name';
 column propval  format a32 heading 'Value';
 column dscp     format a80 heading 'Description' truncate;
