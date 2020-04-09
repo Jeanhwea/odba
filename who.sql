@@ -1,31 +1,31 @@
-SET LINESIZE 255;
-SET PAGESIZE 50000;
-SET FEEDBACK OFF;
-SET TAB OFF;
-SET TERMOUT OFF;
-ALTER SESSION SET NLS_DATE_FORMAT = 'yyyy-mm-dd hh24:mi:ss';
-SET TERMOUT ON;
+set linesize 255;
+set pagesize 50000;
+set feedback off;
+set tab off;
+set termout off;
+alter session set nls_date_format = 'yyyy-mm-dd hh24:mi:ss';
+set termout on;
 
-TTITLE LEFT 'List of User Sessions' SKIP 1 LINE;
--- COLUMN logintype FORMAT A10 HEADING 'Type';
-COLUMN col01 HEADING 'Login Time';
-COLUMN col02 FORMAT A12 HEADING 'User' TRUNCATE;
-COLUMN col03 FORMAT A12 HEADING 'Schema' TRUNCATE;
-COLUMN col04 FORMAT A12 HEADING 'SID';
-COLUMN col05 FORMAT A32 HEADING 'User@Hostname';
-COLUMN col06 FORMAT A24 HEADING 'Program' TRUNCATE;
--- COLUMN status FORMAT A8 HEADING 'Status' TRUNCATE;
--- COLUMN state FORMAT A8 HEADING 'State' TRUNCATE;
+ttitle left 'list of user sessions' skip 1 line;
+-- column logintype format a10 heading 'type';
+column col01 heading 'login time';
+column col02 format a12 heading 'user' truncate;
+column col03 format a12 heading 'schema' truncate;
+column col04 format a12 heading 'sid';
+column col05 format a32 heading 'user@hostname';
+column col06 format a24 heading 'program' truncate;
+-- column status format a8 heading 'status' truncate;
+-- column state format a8 heading 'state' truncate;
 
-SELECT
-  t1.LOGON_TIME AS col01,
-  t1.USERNAME AS col02,
-  t1.SCHEMANAME AS col03,
-  t1.SERVICE_NAME AS col04,
-  t1.OSUSER || '@' || t1.MACHINE AS col05,
-  -- t1.STATUS AS status,
-  -- t1.STATE AS state,
-  t1.PROGRAM AS col06
-  FROM V$SESSION t1
- WHERE t1.TYPE = 'USER'
- ORDER BY col01 DESC, col02;
+select
+  t1.logon_time as col01,
+  t1.username as col02,
+  t1.schemaname as col03,
+  t1.service_name as col04,
+  t1.osuser || '@' || t1.machine as col05,
+  -- t1.status as status,
+  -- t1.state as state,
+  t1.program as col06
+  from v$session t1
+ where lower(t1.type) = 'user'
+ order by col01 desc, col02;
