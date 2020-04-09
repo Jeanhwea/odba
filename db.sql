@@ -1,52 +1,42 @@
-SET LINESIZE 255;
-SET PAGESIZE 50000;
-SET FEEDBACK OFF;
-SET TAB OFF;
+set linesize 255;
+set pagesize 50000;
+set feedback off;
+set tab off;
 
-TTITLE LEFT 'List of User Tablespaces' SKIP 1 LINE;
-COLUMN tspname FORMAT A25 HEADING 'Tablespace Name';
-COLUMN tspsize FORMAT A10 HEADING 'Total';
-COLUMN tspubts FORMAT A10 HEADING 'User Size';
-COLUMN tspmbts FORMAT A10 HEADING 'Max Size';
-COLUMN tspfree FORMAT A10 HEADING 'Free';
-COLUMN tspext FORMAT A8 HEADING 'Extent?';
-COLUMN tspfile FORMAT A80 HEADING 'Data File';
+ttitle left 'List of User Tablespaces' skip 1 line;
+column tspname format a25 heading 'Tablespace';
+column tspsize format a10 heading 'Total';
+column tspubts format a10 heading 'User Size';
+column tspmbts format a10 heading 'Max Size';
+column tspfree format a10 heading 'Free';
+column tspext  format a8 heading 'Extent?';
+column tspfile format a80 heading 'Datafile';
 
--- desc USER_TABLESPACES
+-- desc user_tablespaces
 
-SELECT
-  uts.TABLESPACE_NAME AS tspname,
+select
+  t1.tablespace_name as tspname,
   (
-    SELECT TO_CHAR(SUM(dbdf.BYTES)/1024/1024, '99999.99') || 'M'
-      FROM DBA_DATA_FILES dbdf
-     WHERE uts.TABLESPACE_NAME = dbdf.TABLESPACE_NAME
-  ) AS tspsize,
-  -- (
-  --   SELECT TO_CHAR(SUM(dbdf.USER_BYTES)/1024/1024, '99999.99') || 'M'
-  --     FROM DBA_DATA_FILES dbdf
-  --    WHERE uts.TABLESPACE_NAME = dbdf.TABLESPACE_NAME
-  -- ) AS tspubts,
-  -- (
-  --   SELECT TO_CHAR(SUM(dbdf.MAXBYTES)/1024/1024, '99999.99') || 'M'
-  --     FROM DBA_DATA_FILES dbdf
-  --    WHERE uts.TABLESPACE_NAME = dbdf.TABLESPACE_NAME
-  -- ) AS tspmbts,
+    select to_char(sum(t2.bytes)/1024/1024, '99999.99') || 'M'
+      from dba_data_files t2
+     where t1.tablespace_name = t2.tablespace_name
+  ) as tspsize,
   (
-    SELECT TO_CHAR(SUM(dbfs.BYTES)/1024/1024, '99999.99') || 'M'
-      FROM DBA_FREE_SPACE dbfs
-     WHERE uts.TABLESPACE_NAME = dbfs.TABLESPACE_NAME
-  ) AS tspfree,
+    select to_char(sum(t3.bytes)/1024/1024, '99999.99') || 'M'
+      from dba_free_space t3
+     where t1.tablespace_name = t3.tablespace_name
+  ) as tspfree,
   (
-    SELECT LPAD(dbdf.AUTOEXTENSIBLE, 6, ' ')
-      FROM DBA_DATA_FILES dbdf
-     WHERE uts.TABLESPACE_NAME = dbdf.TABLESPACE_NAME
-  ) AS tspext,
+    select lpad(t4.autoextensible, 6, ' ')
+      from dba_data_files t4
+     where t1.tablespace_name = t4.tablespace_name
+  ) as tspext,
   (
-    SELECT dbdf.FILE_NAME
-      FROM DBA_DATA_FILES dbdf
-     WHERE uts.TABLESPACE_NAME = dbdf.TABLESPACE_NAME
-  ) AS tspfile
-  FROM USER_TABLESPACES uts
- WHERE uts.ALLOCATION_TYPE = 'SYSTEM'
- GROUP BY uts.TABLESPACE_NAME
- ORDER BY tspname;
+    select t5.file_name
+      from dba_data_files t5
+     where t1.tablespace_name = t5.tablespace_name
+  ) as tspfile
+  from user_tablespaces t1
+ where t1.allocation_type = 'system'
+ group by t1.tablespace_name
+ order by tspname;
