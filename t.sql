@@ -17,17 +17,6 @@ column isuniq  format a2   heading 'UQ';
 column colcmt  format a80  heading 'Comment' truncate;
 column cstname format a32  heading 'Constraint';
 
--- list constraint
-ttitle left 'List constraints of table [&tablename]' skip 1 line;
-select
-  t1.constraint_name as cstname,
-  t1.column_name as colname
-  from user_cons_columns t1, user_constraints t2
- where t2.constraint_name = t1.constraint_name and
-       lower(t2.constraint_type) = 'u' and
-       lower(t1.table_name) = lower('&tablename')
- order by t1.position;
-
 -- maximum length of user column name
 -- select max(length(column_name)) user_tab_columns;
 
@@ -66,3 +55,14 @@ select
   from user_tab_columns t1
  where lower(t1.table_name) = lower('&tablename')
  order by ispk, isnul, t1.column_id;
+
+-- list constraint
+ttitle left 'List constraints of table [&tablename]' skip 1 line;
+select
+  t1.constraint_name as cstname,
+  t1.column_name as colname
+  from user_cons_columns t1, user_constraints t2
+ where t2.constraint_name = t1.constraint_name and
+       lower(t2.constraint_type) = 'u' and
+       lower(t1.table_name) = lower('&tablename')
+ order by t1.position;
