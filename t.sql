@@ -23,7 +23,6 @@ column cstname format a32  heading 'Constraint';
 -- list table columns
 ttitle left 'List columns of table [&tablename]' skip 1 line;
 select
-  decode(lower(t1.nullable), 'n', '*', '') as isnul,
   (select 'p'
      from user_cons_columns t2, user_constraints t3
     where t3.constraint_name = t2.constraint_name and
@@ -41,6 +40,7 @@ select
     group by t5.constraint_name
    having count(1) = 1)
     as isuniq,
+  decode(lower(t1.nullable), 'n', '*', '') as isnul,
   t1.column_name as colname,
   t1.data_type as coltype,
   t1.data_length as collen,
