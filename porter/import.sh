@@ -2,8 +2,7 @@
 ################################################################################
 # 启动前需要修改的配置
 ################################################################################
-SERVER=${SERVER:="127.0.0.1"}
-SID=${SID:="ora11g"}
+TNSID=${TNSID:="127.0.0.1/ora11g"}
 SYSUSER=${SYSUSER:="system"}
 SYSPASS=${SYSPASS:="oracle"}
 ################################################################################
@@ -20,7 +19,7 @@ FILETAG=$(date +'%Y%m%d_%H%M%S')
 DATADIR=${DATADIR:="data"}
 DATFILE="${DATADIR}/data.dmp"
 LOGFILE="${DATADIR}/${FILETAG}_import.log"
-USERID="${SYSUSER}/${SYSPASS}@${SERVER}/${SID}"
+USERID="${SYSUSER}/${SYSPASS}@${TNSID}"
 
 # 导入数据文件
 echo "Import from $USERID"
