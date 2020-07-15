@@ -16,7 +16,7 @@ export TZ='Asia/Shanghai'
 export NLS_LANG='.ZHS16GBK'
 
 # 处理日期和时间
-NOWTAG=$(date +'%Y-%m-%d $H:%M:%S')
+NOWTAG=$(date +'%Y-%m-%d %H:%M:%S')
 FILETAG=$(date +'%Y%m%d_%H%M%S')
 
 # 处理文件夹和文件
@@ -47,7 +47,7 @@ echo "Save log to $LOGFILE"
 echo "Export from $USERID" >> $LOGFILE
 
 # 处理日期和时间
-NOWTAG=$(date +'%Y-%m-%d $H:%M:%S')
+NOWTAG=$(date +'%Y-%m-%d %H:%M:%S')
 echo "  Finish Time     ${NOWTAG}                                   " >> $README
 echo "--------------------------------------------------------------" >> $README
 
