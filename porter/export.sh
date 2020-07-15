@@ -1,13 +1,14 @@
 #!/bin/bash
-HERE=`cd $(dirname $0); pwd`
 ################################################################################
 # 启动前需要修改的配置
 ################################################################################
-SERVER=${SERVER:="127.0.0.1"}
-SID=${SID:="ora11g"}
+TNSID=${TNSID:="127.0.0.1/ora11g"}
 SYSUSER=${SYSUSER:="system"}
 SYSPASS=${SYSPASS:="oracle"}
 ################################################################################
+
+# 配置主机信息
+HERE=`cd $(dirname $0); pwd`
 
 # 环境变量设置
 export TZ='Asia/Shanghai'
@@ -21,25 +22,24 @@ FILETAG=$(date +'%Y%m%d_%H%M%S')
 DATADIR=${DATADIR:="data"}
 DATFILE="${DATADIR}/${FILETAG}_export.dmp"
 LOGFILE="${DATADIR}/${FILETAG}_export.log"
-USERID="${SYSUSER}/${SYSPASS}@${SERVER}/${SID}"
+USERID="${SYSUSER}/${SYSPASS}@${TNSID}/${SID}"
 
 # 打印导出的配置
 README="${DATADIR}/readme.txt"
-echo "------------------------------------------------------------"  > $README
-echo "Configurations for exporting                                " >> $README
-echo "------------------------------------------------------------" >> $README
-echo "  ORACLE_HOME   $ORACLE_HOME                                " >> $README
-echo "  NLS_LANG      $NLS_LANG                                   " >> $README
-echo "------------------------------------------------------------" >> $README
-echo "  Host Name     $(hostname)                                 " >> $README
-echo "  Base Foleder  $HERE                                       " >> $README
-echo "  Start Date    $(date +'%Y-%m-%d')                         " >> $README
-echo "  Start Time    $(date +'%H:%M:%S')                         " >> $README
-echo "------------------------------------------------------------" >> $README
-echo "  Server        $SERVER                                     " >> $README
-echo "  SID           $SID                                        " >> $README
-echo "  Export User   $SYSUSER                                    " >> $README
-echo "------------------------------------------------------------" >> $README
+echo "--------------------------------------------------------------" >> $README
+echo "Configurations for exporting                                  " >> $README
+echo "--------------------------------------------------------------" >> $README
+echo "  ORACLE_HOME     $ORACLE_HOME                                " >> $README
+echo "  NLS_LANG        $NLS_LANG                                   " >> $README
+echo "--------------------------------------------------------------" >> $README
+echo "  Host Name       $(hostname)                                 " >> $README
+echo "  Base Foleder    $HERE                                       " >> $README
+echo "  Start Date      $(date +'%Y-%m-%d')                         " >> $README
+echo "  Start Time      $(date +'%H:%M:%S')                         " >> $README
+echo "--------------------------------------------------------------" >> $README
+echo "  TNS Identifier  $TNSID                                      " >> $README
+echo "  Export User     $SYSUSER                                    " >> $README
+echo "--------------------------------------------------------------" >> $README
 cat $README
 
 # 导出数据文件
