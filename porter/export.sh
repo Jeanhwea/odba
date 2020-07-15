@@ -37,7 +37,7 @@ echo "  Export User     $SYSUSER                                    " >> $README
 echo "--------------------------------------------------------------" >> $README
 echo "  Host Name       $(hostname)                                 " >> $README
 echo "  Base Foleder    $HERE                                       " >> $README
-echo "  Start Time      $(NOWTAG)                                   " >> $README
+echo "  Start Time      ${NOWTAG}                                   " >> $README
 cat $README
 
 # 导出数据文件
@@ -48,7 +48,7 @@ echo "Export from $USERID" >> $LOGFILE
 
 # 处理日期和时间
 NOWTAG=$(date +'%Y-%m-%d $H:%M:%S')
-echo "  Finish Time     $(NOWTAG)                                   " >> $README
+echo "  Finish Time     ${NOWTAG}                                   " >> $README
 echo "--------------------------------------------------------------" >> $README
 
 # 打包压缩文件
