@@ -23,3 +23,6 @@ alter system set job_queue_processes=10;
 -- alter system set sga_target=32000m scope=spfile;
 -- alter system set lock_sga=true scope=spfile;
 -- alter system set pre_page_sga=true scope=spfile;
+
+-- 生产环境关闭延迟段创建特性
+alter system set deferred_segment_creation=false;
